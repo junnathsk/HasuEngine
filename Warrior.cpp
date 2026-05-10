@@ -15,16 +15,17 @@ void Warrior::Update(float dt){
 	// Update Animation
 	m_animation->Update();
 
-	m_Position.X += m_rigidBody->GetPosition().X;
-	m_Position.Y += m_rigidBody->GetPosition().Y;
-	
+	/*m_transform.X += m_rigidBody->GetPosition().X;
+	m_transform.Y += m_rigidBody->GetPosition().Y;*/
 
-	m_rigidBody->Update(1);
+	m_transform.Translate(m_rigidBody->GetPosition());
+
+	m_rigidBody->Update(0.2);
 }
 
 void Warrior::Draw(){
 
-	m_animation->Draw(m_Position.X, m_Position.Y, m_Width, m_Height);
+	m_animation->Draw(m_transform.X, m_transform.Y, m_Width, m_Height);
 	//TextureManager::GetInstance()->DrawFrame(m_TextureID, m_Position.X, m_Position.Y, m_Width, m_Height, m_row, m_frame);
 }
 

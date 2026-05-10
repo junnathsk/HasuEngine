@@ -10,7 +10,7 @@
 struct Properties {
 	std::string TextureID;
 	float Width, Height;
-	Vector2 Pos;
+	Transform Pos;
 	SDL_RendererFlip Flip;
 
 	/// <summary>
@@ -21,7 +21,7 @@ struct Properties {
 	/// <param name="width">Object Width</param>
 	/// <param name="height">Object Height</param>
 	/// <param name="flip">SDL FLIP</param>
-	Properties(std::string textureID, Vector2 pos, float width, float height,
+	Properties(std::string textureID, Transform pos, float width, float height,
 		SDL_RendererFlip flip = SDL_FLIP_NONE)
 		: TextureID(textureID), Width(width), Height(height), Pos(pos),
 		Flip(flip) {
@@ -31,7 +31,7 @@ struct Properties {
 class GameObject : public IObject{
 public :
 	GameObject(const Properties& props)
-		: m_Position(props.Pos), m_Width(props.Width),
+		: m_transform(props.Pos), m_Width(props.Width),
 		m_Height(props.Height), m_TextureID(props.TextureID),
 		m_Flip(props.Flip) {
 	}
@@ -41,7 +41,7 @@ public :
 	virtual void Clean() override;
 
 protected:
-	Vector2 m_Position = {};
+	Transform m_transform = {};
 	float m_Width = 64;
 	float m_Height = 64;
 	std::string m_TextureID;
