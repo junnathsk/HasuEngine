@@ -1,8 +1,9 @@
 ﻿#include "Engine.h"
 #include "TextureManager.h"
-#include "Transform.h"
+#include "Warrior.h"
 
 Engine* Engine::s_Instance = nullptr;
+Warrior* player = nullptr;
 
 Engine::Engine() {
 	isRunning_ = false;
@@ -26,21 +27,24 @@ bool Engine::Init() {
 		return false;
 	}
 	
-	TextureManager::GetInstance()->Load("Magnet", "Resources/magnet.png");
+	TextureManager::GetInstance()->Load("player", "Resources/player.png");
+	player = new Warrior(Properties("player", {100,200}, 80, 100));
 
-	Transform tf(10,20);
+	Transform tf(22,20);
 	tf.Log();
 	
 	return isRunning_ = true;
 }
 
 void Engine::Update(){
+	player->Update();
 }
 
 void Engine::Render(){
 	SDL_SetRenderDrawColor(renderer_, 205, 205, 255, 255);
 	SDL_RenderClear(renderer_);
-	TextureManager::GetInstance()->Draw("Magnet", 60,60,32,32);
+	//TextureManager::GetInstance()->Draw("Magnet", 60,60,32,32);
+	player->Draw();
 	SDL_RenderPresent(renderer_);
 }
 
