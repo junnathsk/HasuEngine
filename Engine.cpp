@@ -10,6 +10,8 @@ Engine::Engine() {
 }
 
 bool Engine::Init() {
+// Initialize SDL
+#pragma region INITIALIZE SDL
 	if (SDL_Init(SDL_INIT_VIDEO) != 0 && IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) != 0) {
 		SDL_Log("Failed to Initialized SDL : %s", SDL_GetError());
 		return false;
@@ -26,7 +28,8 @@ bool Engine::Init() {
 		SDL_Log("Failed to Create SDL Renderer: %s", SDL_GetError());
 		return false;
 	}
-	
+#pragma endregion
+
 	TextureManager::GetInstance()->Load("player", "Resources/player.png");
 	player = new Warrior(Properties("player", {100,200}, 80, 100));
 
@@ -37,14 +40,16 @@ bool Engine::Init() {
 }
 
 void Engine::Update(){
-	player->Update();
+	player->Update(0);
 }
 
 void Engine::Render(){
 	SDL_SetRenderDrawColor(renderer_, 205, 205, 255, 255);
 	SDL_RenderClear(renderer_);
-	//TextureManager::GetInstance()->Draw("Magnet", 60,60,32,32);
+	// Draw Starts here
 	player->Draw();
+
+	// Draw Ends here
 	SDL_RenderPresent(renderer_);
 }
 

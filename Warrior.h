@@ -1,16 +1,18 @@
 ﻿#pragma once
 
 #include "Character.h"
+#include "Animation.h"
+#include "RigidBody.h"
 
 class Warrior : public Character {
 public:
 	Warrior(Properties props);
 
-	virtual void Update() override;
+	virtual void Update(float dt) override;
 	virtual void Draw() override;
 	virtual void Clean() override;
 private:
-	int m_row, m_frame, m_frameCount;
-	int m_animationSpeed;
+	Animation* m_animation;
+	RigidBody* m_rigidBody;
 };
 

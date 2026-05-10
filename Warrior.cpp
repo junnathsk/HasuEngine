@@ -3,18 +3,29 @@
 #include "SDL.h"
 
 Warrior::Warrior(Properties props) : Character (props){
-	m_row = 0;
-	m_frame = 0;
-	m_frameCount = 8;			// max frame
-	m_animationSpeed = 120;		// change every 60 frame
+	// Initialize Animation
+	m_animation = new Animation();
+	m_animation->SetProps(m_TextureID, 0, 8, 120);
+
+	// Initialize RigidBody
+	m_rigidBody = new RigidBody();
 }
 
-void Warrior::Update(){
-	m_frame = (SDL_GetTicks() / m_animationSpeed) % m_frameCount;
+void Warrior::Update(float dt){
+	// Update Animation
+	m_animation->Update();
+
+	m_Position.X += m_rigidBody->GetPosition().X;
+	m_Position.Y += m_rigidBody->GetPosition().Y;
+	
+
+	m_rigidBody->Update(1);
 }
 
 void Warrior::Draw(){
-	TextureManager::GetInstance()->DrawFrame(m_TextureID, m_Position.X, m_Position.Y, m_Width, m_Height, m_row, m_frame);
+
+	m_animation->Draw(m_Position.X, m_Position.Y, m_Width, m_Height);
+	//TextureManager::GetInstance()->DrawFrame(m_TextureID, m_Position.X, m_Position.Y, m_Width, m_Height, m_row, m_frame);
 }
 
 void Warrior::Clean(){

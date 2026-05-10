@@ -13,6 +13,14 @@ struct Properties {
 	Vector2 Pos;
 	SDL_RendererFlip Flip;
 
+	/// <summary>
+	/// Set Object Properties
+	/// </summary>
+	/// <param name="textureID">object ID</param>
+	/// <param name="pos">Position</param>
+	/// <param name="width">Object Width</param>
+	/// <param name="height">Object Height</param>
+	/// <param name="flip">SDL FLIP</param>
 	Properties(std::string textureID, Vector2 pos, float width, float height,
 		SDL_RendererFlip flip = SDL_FLIP_NONE)
 		: TextureID(textureID), Width(width), Height(height), Pos(pos),
@@ -28,14 +36,14 @@ public :
 		m_Flip(props.Flip) {
 	}
 
-	virtual void Update() override;
+	virtual void Update(float dt) override;
 	virtual void Draw() override;
 	virtual void Clean() override;
 
 protected:
 	Vector2 m_Position = {};
-	float m_Width = 0;
-	float m_Height = 0;
+	float m_Width = 64;
+	float m_Height = 64;
 	std::string m_TextureID;
 	SDL_RendererFlip m_Flip;
 };

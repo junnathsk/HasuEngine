@@ -1,13 +1,7 @@
 ﻿#include "Character.h"
 
-void Character::Update()
-{
-}
+void Character::Update(float dt){}
 
-void Character::Draw()
-{
-}
+void Character::Draw(){}
 
-void Character::Clean()
-{
-}
+void Character::Clean(){}
