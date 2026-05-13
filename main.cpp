@@ -1,4 +1,5 @@
 ﻿#include "Engine.h"
+#include "Timer.h"
 
 int main(int argc, char** argv) {
 	Engine::GetInstance()->Init();
@@ -7,6 +8,7 @@ int main(int argc, char** argv) {
 		Engine::GetInstance()->Engine::Events();
 		Engine::GetInstance()->Engine::Update();
 		Engine::GetInstance()->Engine::Render();
+		Timer::GetInstance()->Timer::Tick();
 	}
 
 	Engine::GetInstance()->Engine::Clean();

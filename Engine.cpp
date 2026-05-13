@@ -1,6 +1,8 @@
 ﻿#include "Engine.h"
 #include "TextureManager.h"
 #include "Warrior.h"
+#include "Input.h"
+#include "Timer.h"
 
 Engine* Engine::s_Instance = nullptr;
 Warrior* player = nullptr;
@@ -40,7 +42,8 @@ bool Engine::Init() {
 }
 
 void Engine::Update(){
-	player->Update(0);
+	float dt = Timer::GetInstance()->GetDeltaTime();
+	player->Update(dt);
 }
 
 void Engine::Render(){
@@ -54,16 +57,7 @@ void Engine::Render(){
 }
 
 void Engine::Events(){
-	SDL_Event event;
-	SDL_PollEvent(&event);
-	switch (event.type) {
-	case SDL_QUIT:
-		Quit();
-		break;
-	default:
-
-		break;
-	}
+	Input::GetInstance()->Listen();
 }
 
 bool Engine::Clean() {
