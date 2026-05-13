@@ -42,6 +42,7 @@ bool Engine::Init() {
 }
 
 void Engine::Update(){
+	// update delta time
 	float dt = Timer::GetInstance()->GetDeltaTime();
 	player->Update(dt);
 }
