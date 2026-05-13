@@ -28,6 +28,12 @@ void TextureManager::Draw(std::string id, int x, int y, int width, int height, S
 	SDL_RenderCopyEx(Engine::GetInstance()->GetRenderer(), textureMap_[id], &srcRect, &desRect, 0, nullptr, flip);
 }
 
+void TextureManager::DrawFrame(std::string id, float x, float y, float width, float height, int row, int frame, SDL_RendererFlip flip){
+	SDL_Rect srcRect = { width*frame, height*row, width, height};
+	SDL_Rect desRect = { x,y, width, height };
+	SDL_RenderCopyEx(Engine::GetInstance()->GetRenderer(), textureMap_[id], &srcRect, &desRect, 0, nullptr, flip);
+}
+
 void TextureManager::Drop(std::string id){
 	SDL_DestroyTexture(textureMap_[id]);
 	textureMap_.erase(id);

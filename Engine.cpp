@@ -1,14 +1,19 @@
 ﻿#include "Engine.h"
 #include "TextureManager.h"
-#include "Transform.h"
+#include "Warrior.h"
+#include "Input.h"
+#include "Timer.h"
 
 Engine* Engine::s_Instance = nullptr;
+Warrior* player = nullptr;
 
 Engine::Engine() {
 	isRunning_ = false;
 }
 
 bool Engine::Init() {
+// Initialize SDL
+#pragma region INITIALIZE SDL
 	if (SDL_Init(SDL_INIT_VIDEO) != 0 && IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) != 0) {
 		SDL_Log("Failed to Initialized SDL : %s", SDL_GetError());
 		return false;
@@ -25,36 +30,34 @@ bool Engine::Init() {
 		SDL_Log("Failed to Create SDL Renderer: %s", SDL_GetError());
 		return false;
 	}
-	
-	TextureManager::GetInstance()->Load("Magnet", "Resources/magnet.png");
+#pragma endregion
 
-	Transform tf(10,20);
+	TextureManager::GetInstance()->Load("player", "Resources/player.png");
+	player = new Warrior(Properties("player", {100,200}, 80, 100));
+
+	Transform tf(22,20);
 	tf.Log();
 	
 	return isRunning_ = true;
 }
 
 void Engine::Update(){
+	float dt = Timer::GetInstance()->GetDeltaTime();
+	player->Update(dt);
 }
 
 void Engine::Render(){
 	SDL_SetRenderDrawColor(renderer_, 205, 205, 255, 255);
 	SDL_RenderClear(renderer_);
-	TextureManager::GetInstance()->Draw("Magnet", 60,60,32,32);
+	// Draw Starts here
+	player->Draw();
+
+	// Draw Ends here
 	SDL_RenderPresent(renderer_);
 }
 
 void Engine::Events(){
-	SDL_Event event;
-	SDL_PollEvent(&event);
-	switch (event.type) {
-	case SDL_QUIT:
-		Quit();
-		break;
-	default:
-
-		break;
-	}
+	Input::GetInstance()->Listen();
 }
 
 bool Engine::Clean() {

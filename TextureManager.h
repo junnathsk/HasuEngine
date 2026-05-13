@@ -21,6 +21,18 @@ public:
 	void Clean();
 
 	void Draw(std::string id, int x, int y, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	/// <summary>
+	/// Draw Animation
+	/// </summary>
+	/// <param name="id"></param>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
+	/// <param name="row"></param>
+	/// <param name="frame"></param>
+	/// <param name="flip"></param>
+	void DrawFrame(std::string id, float x, float y, float width, float height, int row, int frame, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	
 private:
 	TextureManager() {};
