@@ -22,22 +22,22 @@ void Warrior::Update(float dt){
 	// Move Left
 	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_A)) {
 		m_animation->SetProps(m_TextureID, 0, 8, 120, SDL_FLIP_HORIZONTAL);
-		m_rigidBody->ApplyForceX(2 * BACKWARD);
+		m_rigidBody->ApplyForceX(4 * BACKWARD);
 	}
 	// Move Right
 	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D)) {
 		m_animation->SetProps(m_TextureID, 0, 8, 120);
-		m_rigidBody->ApplyForceX(2 * FORWARD);
+		m_rigidBody->ApplyForceX(4 * FORWARD);
 	}
 	// Move Up
 	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_W)) {
 		m_animation->SetProps(m_TextureID, 0, 8, 120);
-		m_rigidBody->ApplyForceY(2 * UPWARD);
+		m_rigidBody->ApplyForceY(4 * UPWARD);
 	}
 	// Move Down
 	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_S)) {
 		m_animation->SetProps(m_TextureID, 0, 8, 120);
-		m_rigidBody->ApplyForceY(2 * DOWNWARD);
+		m_rigidBody->ApplyForceY(4 * DOWNWARD);
 	}
 
 	// Update Rigidbody
@@ -46,6 +46,8 @@ void Warrior::Update(float dt){
 	m_transform.X += m_rigidBody->GetPosition().X;
 	m_transform.Y += m_rigidBody->GetPosition().Y;
 
+	m_origin->X = m_transform.X + m_Width / 2;
+	m_origin->Y = m_transform.Y + m_Height / 2;
 	// Update Animation
 	m_animation->Update();
 }

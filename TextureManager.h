@@ -21,6 +21,7 @@ public:
 	void Clean();
 
 	void Draw(std::string id, int x, int y, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	void DrawTile(std::string tileSetID, int x, int y, int tileSize, int row, int frame, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	/// <summary>
 	/// Draw Animation
 	/// </summary>
