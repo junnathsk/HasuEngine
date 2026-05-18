@@ -31,7 +31,10 @@
     <Filter Include="Source Files\Animation">
       <UniqueIdentifier>{9ce024bf-4401-41fe-acc0-cf12b95e22a4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Timer">
+    <Filter Include="Source Files\Map">
+      <UniqueIdentifier>{7bb2186f-fabf-486c-95e2-a55bdb33ddbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Timer">
       <UniqueIdentifier>{95a6728d-60b1-4bc1-b94c-d5a5db0cca0b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -67,7 +70,28 @@
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
-      <Filter>Source Files\Timer</Filter>
+      <Filter>Source Files\Core\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="TileLayer.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapParser.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinystr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxmlerror.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxmlparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,7 +129,28 @@
       <Filter>Source Files\Animation</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
-      <Filter>Source Files\Timer</Filter>
+      <Filter>Source Files\Core\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>Source Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.h">
+      <Filter>Source Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TileLayer.h">
+      <Filter>Source Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapParser.h">
+      <Filter>Source Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml\tinystr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml\tinyxml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Source Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

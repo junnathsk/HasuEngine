@@ -2,7 +2,10 @@
 #include "TextureManager.h"
 #include "Warrior.h"
 #include "Input.h"
-#include "Timer.h"
+#include "Timer.h" 
+#include "MapParser.h"
+#include "Camera.h"
+#include <iostream>
 
 Engine* Engine::s_Instance = nullptr;
 Warrior* player = nullptr;
@@ -19,7 +22,8 @@ bool Engine::Init() {
 		return false;
 	}
 
-	window_ = SDL_CreateWindow("TITLE", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, false);
+	SDL_WindowFlags windowFlags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+	window_ = SDL_CreateWindow("TITLE", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
 	if (window_ == nullptr) {
 		SDL_Log("Failed to Create SDL Window : %s", SDL_GetError());
 		return false;
@@ -32,11 +36,21 @@ bool Engine::Init() {
 	}
 #pragma endregion
 
+	// Initialize Map
+	if (!MapParser::GetInstance()->Load()) {
+		std::cout << "Failed to Load Map" << std::endl;
+	}
+	m_levelMap = MapParser::GetInstance()->GetMap("MAP");
+
+	// Initialize Player
 	TextureManager::GetInstance()->Load("player", "Resources/player.png");
 	player = new Warrior(Properties("player", {100,200}, 80, 100));
 
 	Transform tf(22,20);
 	tf.Log();
+
+	// Initialize Camera
+	Camera::GetInstance()->SetTarget(player->GetOrigin());
 	
 	return isRunning_ = true;
 }
@@ -44,13 +58,16 @@ bool Engine::Init() {
 void Engine::Update(){
 	// update delta time
 	float dt = Timer::GetInstance()->GetDeltaTime();
+	m_levelMap->Update();
 	player->Update(dt);
+	Camera::GetInstance()->Update(dt);
 }
 
 void Engine::Render(){
 	SDL_SetRenderDrawColor(renderer_, 205, 205, 255, 255);
 	SDL_RenderClear(renderer_);
 	// Draw Starts here
+	m_levelMap->Render();
 	player->Draw();
 
 	// Draw Ends here
@@ -63,6 +80,7 @@ void Engine::Events(){
 
 bool Engine::Clean() {
 	TextureManager::GetInstance()->Clean();
+	//MapParser::GetInstance()->Clean();
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
 	IMG_Quit();

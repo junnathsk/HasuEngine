@@ -34,13 +34,19 @@ public :
 		: m_transform(props.Pos), m_Width(props.Width),
 		m_Height(props.Height), m_TextureID(props.TextureID),
 		m_Flip(props.Flip) {
+		float px = props.Pos.X + props.Width/2;
+		float py = props.Pos.Y + props.Height/2;
+		m_origin = new Vector2(px, py);
 	}
 
 	virtual void Update(float dt) override;
 	virtual void Draw() override;
 	virtual void Clean() override;
 
+	inline Vector2* GetOrigin() { return m_origin; }
+
 protected:
+	Vector2* m_origin;
 	Transform m_transform = {};
 	float m_Width = 64;
 	float m_Height = 64;

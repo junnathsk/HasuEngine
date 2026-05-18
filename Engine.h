@@ -2,6 +2,8 @@
 #include "SDL.h"
 #include "SDL_image.h"
 
+#include "GameMap.h"
+
 #define SCREEN_WIDTH 1280		// Window Width size
 #define SCREEN_HEIGHT 720		// Window Height size
 
@@ -33,5 +35,7 @@ private:
 	SDL_Renderer* renderer_;
 
 	static Engine* s_Instance;
+
+	GameMap* m_levelMap;
 };
 
