@@ -44,7 +44,7 @@ bool Engine::Init() {
 
 	// Initialize Player
 	TextureManager::GetInstance()->Load("player", "Resources/player.png");
-	player = new Warrior(Properties("player", {100,200}, 80, 100));
+	player = new Warrior(Properties("player",  58, 72));
 
 	Transform tf(22,20);
 	tf.Log();
@@ -60,6 +60,8 @@ void Engine::Update(){
 	float dt = Timer::GetInstance()->GetDeltaTime();
 	m_levelMap->Update();
 	player->Update(dt);
+
+	Input::GetInstance()->Update();
 	Camera::GetInstance()->Update(dt);
 }
 

@@ -24,12 +24,26 @@ void Input::Listen(){
 		}
 	}
 }
+void Input::Update(){
+	// Copy current state to previous
+	memcpy(m_preKeyStates, m_keyStates, SDL_NUM_SCANCODES);
+
+	// Refresh SDL keyboard state
+	SDL_PumpEvents();
+
+	m_keyStates = SDL_GetKeyboardState(nullptr);
+}
+
 
 bool Input::GetKeyDown(SDL_Scancode key){
 	if (m_keyStates[key] == 1) {
 		return true;
 	}
 	return false;
+}
+
+bool Input::GetIsTrigger(SDL_Scancode key){
+	return m_keyStates[key] && !m_preKeyStates[key];
 }
 
 void Input::KeyUp(){

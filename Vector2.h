@@ -25,6 +25,16 @@ public:
 		return Vector2(X*scalar, Y*scalar);
 	}
 
+	inline void operator+=(const Vector2& v) {
+		X += v.X;
+		Y += v.Y;
+	}
+
+	inline void operator-=(const Vector2& v) {
+		X -= v.X;
+		Y -= v.Y;
+	}
+
 	// Debug Log
 	void Log(std::string msg = "") {
 		std::cout << msg << "(X Y) = (" << X << "," << Y << ")" << std::endl; 
