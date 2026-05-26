@@ -12,6 +12,8 @@ public:
 	}
 
 	void Listen();
+
+	void Update();
 	
 	/// <summary>
 	/// Check if the key is pushed or not
@@ -20,12 +22,15 @@ public:
 	/// <returns></returns>
 	bool GetKeyDown(SDL_Scancode key);
 
+	bool GetIsTrigger(SDL_Scancode key);
+
 private:
 	Input();
 	void KeyUp();
 	void KeyDown();
 
 	const Uint8* m_keyStates;		// if 1 key is pushed if 0 not pushed
+	Uint8 m_preKeyStates[SDL_NUM_SCANCODES];		// if 1 key is pushed if 0 not pushed
 	static Input* s_Instance;
 };
 

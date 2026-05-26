@@ -37,6 +37,9 @@
     <Filter Include="Source Files\Core\Timer">
       <UniqueIdentifier>{95a6728d-60b1-4bc1-b94c-d5a5db0cca0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Collision">
+      <UniqueIdentifier>{3efaa032-1ccd-42f4-b10f-facb61c8c9ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionHandler.cpp">
+      <Filter>Source Files\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +157,12 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionHandler.h">
+      <Filter>Source Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Source Files\Collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
